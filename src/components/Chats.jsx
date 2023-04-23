@@ -15,7 +15,7 @@ const Chats = () => {
       <div className="user__chat" onClick={mobile ? openChat : ""}>
         <img src={img} alt="" />
         <div className="user__chat__info">
-          <span>Jane</span>
+          <span>John</span>
           <p>Hello</p>
         </div>
       </div>
@@ -31,7 +31,7 @@ const Chats = () => {
       <div className="user__chat">
         <img src={img} alt="" />
         <div className="user__chat__info">
-          <span>Jane</span>
+          <span>Doe</span>
           <p>Hello</p>
         </div>
       </div>

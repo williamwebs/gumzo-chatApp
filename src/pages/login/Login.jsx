@@ -13,12 +13,12 @@ const Login = () => {
         </form>
         <p>Don't have an account? Register</p>
         {/* loader */}
-        <div className="loader__wrapper">
+        {/* <div className="loader__wrapper">
           <div className="loader"></div>
           <div className="loader"></div>
           <div className="loader"></div>
           <div className="loader"></div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
