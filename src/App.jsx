@@ -4,7 +4,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 
 function App() {
-  const { currentUser } = useContext(AuthContext);
+  // why did destructuring the current user using curly braces not work?
+  const currentUser = useContext(AuthContext);
   console.log(currentUser);
 
   // protected route to check for user
@@ -12,13 +13,16 @@ function App() {
     if (!currentUser) {
       return <Navigate to="/login" />;
     }
+
+    return children;
   };
 
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" />
         <Route
-          path="/"
+          index
           element={
             <ProtectedRoute>
               <Home />
