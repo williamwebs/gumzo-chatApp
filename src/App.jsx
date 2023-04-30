@@ -6,7 +6,7 @@ import { AuthContext } from "./context/AuthContext";
 function App() {
   // why did destructuring the current user using curly braces not work?
   const currentUser = useContext(AuthContext);
-  console.log(currentUser);
+  // console.log(currentUser);
 
   // protected route to check for user
   const ProtectedRoute = ({ children }) => {

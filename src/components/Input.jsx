@@ -2,6 +2,7 @@ import { AiOutlinePaperClip } from "react-icons/ai";
 import { BsImageFill } from "react-icons/bs";
 
 const Input = () => {
+  //  function where the predictive model os going to sit
   return (
     <div className="input">
       <input type="text" placeholder="Type something..." />

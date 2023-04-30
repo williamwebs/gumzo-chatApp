@@ -8,10 +8,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [err, setErr] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     console.log(e);
 
     const displayName = e.target[0].value;
@@ -19,7 +21,12 @@ const Register = () => {
     const password = e.target[2].value;
     const file = e.target[3].files[0];
 
+    if (displayName != "" && password > 6) {
+    } else {
+    }
+
     try {
+      setErr(false);
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const storageRef = ref(storage, displayName);
       const uploadTask = uploadBytesResumable(storageRef, file);
@@ -49,6 +56,7 @@ const Register = () => {
             // userChat collection
             await setDoc(doc(db, "userChats", res.user.uid), {});
             navigate("/");
+            setLoading(false);
           });
         }
       );
@@ -56,6 +64,7 @@ const Register = () => {
     } catch (error) {
       setErr(true);
       console.log("fail!");
+      setLoading(false);
     }
   };
 
@@ -70,11 +79,14 @@ const Register = () => {
           <input type="password" placeholder="password" />
           <input style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">Add an avatar</label>
-          <button>Sign Up</button>
+          <button>{loading ? "Creating Account..." : "Register"}</button>
           {err && <span className="error__message">Something went wrong!</span>}
         </form>
         <p>
-          Already have an account? <Link to="/login">Login</Link>
+          Already have an account?{" "}
+          <Link to="/login" className="link">
+            Login
+          </Link>
         </p>
       </div>
     </section>

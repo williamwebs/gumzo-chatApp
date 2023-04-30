@@ -1,9 +1,31 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import img from "../asset/image.jpg";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "../config/Index";
+import { AuthContext } from "../context/AuthContext";
 
 const Chats = () => {
   //states for mobile
   const [mobile, setMobile] = useState(true);
+  const [chats, setChats] = useState([]);
+
+  const currentUser = useContext(AuthContext);
+
+  useEffect(() => {
+    const getChats = () => {
+      const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
+        setChats(doc.data());
+      });
+
+      return () => {
+        unsub();
+      };
+    };
+
+    currentUser.uid && getChats();
+  }, [currentUser.uid]);
+
+  console.log(Object.entries(chats));
 
   // handle openChat
   const openChat = () => {
@@ -12,30 +34,21 @@ const Chats = () => {
 
   return (
     <div className="chats">
-      <div className="user__chat" onClick={mobile ? openChat : ""}>
-        <img src={img} alt="" />
-        <div className="user__chat__info">
-          <span>John</span>
-          <p>Hello</p>
-        </div>
-      </div>
-      {/*  */}
-      <div className="user__chat">
-        <img src={img} alt="" />
-        <div className="user__chat__info">
-          <span>Jane</span>
-          <p>Hello</p>
-        </div>
-      </div>
-      {/*  */}
-      <div className="user__chat">
-        <img src={img} alt="" />
-        <div className="user__chat__info">
-          <span>Doe</span>
-          <p>Hello</p>
-        </div>
-      </div>
-      {/*  */}
+      {Object.entries(chats).map((chat) => {
+        return (
+          <div
+            className="user__chat"
+            // onClick={mobile ? openChat : ""}
+            key={chat[0]}
+          >
+            <img src={chat[1].userInfo.photoURL} alt="" />
+            <div className="user__chat__info">
+              <span>{chat[1].userInfo.displayName}</span>
+              <p>{chat[1].userInfo.lastMessage?.text}</p>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
