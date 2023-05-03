@@ -3,6 +3,7 @@ import { Home, Login, Register } from "./components/Index";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 
+
 function App() {
   // why did destructuring the current user using curly braces not work?
   const currentUser = useContext(AuthContext);

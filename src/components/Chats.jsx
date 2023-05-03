@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import img from "../asset/image.jpg";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../config/Index";
 import { AuthContext } from "../context/AuthContext";
+import { ChatContext } from "../context/ChatContext";
 
 const Chats = () => {
   //states for mobile
@@ -10,6 +10,7 @@ const Chats = () => {
   const [chats, setChats] = useState([]);
 
   const currentUser = useContext(AuthContext);
+  const dispatch = useContext(ChatContext);
 
   useEffect(() => {
     const getChats = () => {
@@ -32,6 +33,10 @@ const Chats = () => {
     console.log("clicked");
   };
 
+  const handleSelect = (u) => {
+    dispatch({ type: "CHANGE_USER", payload: u });
+  };
+
   return (
     <div className="chats">
       {Object.entries(chats).map((chat) => {
@@ -40,6 +45,7 @@ const Chats = () => {
             className="user__chat"
             // onClick={mobile ? openChat : ""}
             key={chat[0]}
+            onClick={() => handleSelect(chat[1].userInfo)}
           >
             <img src={chat[1].userInfo.photoURL} alt="" />
             <div className="user__chat__info">

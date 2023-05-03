@@ -1,12 +1,17 @@
 import { BsCameraVideoFill, BsFillPersonPlusFill } from "react-icons/bs";
 import { IoEllipsisHorizontalSharp } from "react-icons/io5";
 import { Input, Messages } from "./Index";
+import { useContext } from "react";
+import { ChatContext } from "../context/ChatContext";
 
 const MainChat = () => {
+  const { state } = useContext(ChatContext);
+  console.log(state);
+  // const { data } = useContext(ChatContext);
   return (
     <div className="main__chat">
       <div className="chat__info">
-        <span>Jane</span>
+        {/* <span>{state.user?.displayName}</span> */}
         <div className="chat__icons">
           <BsCameraVideoFill className="icon" />
           <BsFillPersonPlusFill className="icon" />
