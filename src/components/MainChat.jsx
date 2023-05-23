@@ -5,13 +5,12 @@ import { useContext } from "react";
 import { ChatContext } from "../context/ChatContext";
 
 const MainChat = () => {
-  const { state } = useContext(ChatContext);
-  console.log(state);
-  // const { data } = useContext(ChatContext);
+  const { data } = useContext(ChatContext);
+
   return (
     <div className="main__chat">
       <div className="chat__info">
-        {/* <span>{state.user?.displayName}</span> */}
+        <span>{data.user?.displayName}</span>
         <div className="chat__icons">
           <BsCameraVideoFill className="icon" />
           <BsFillPersonPlusFill className="icon" />
