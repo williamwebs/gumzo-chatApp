@@ -65,7 +65,7 @@
 
       input {
         padding: 1rem;
-        border: none;
+        border: 1px solid;
         // outline: none;
         width: 16rem;
         border-bottom: 1px solid #a7bcff;
@@ -136,6 +136,15 @@
     .side__bar {
       flex: 1;
       background: #3e3c61;
+      overflow-y: scroll;
+
+      &::-webkit-scrollbar {
+        width: 0.3rem;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #5d5b8d;
+      }
 
       @include mobile {
         width: 100%;
@@ -344,7 +353,7 @@
       }
 
       .input {
-        height: 3rem;
+        height: 2.5rem;
         padding: 0.8rem;
         background-color: #fff;
         display: flex;

@@ -21,3 +21,17 @@
   --text_blue: #5d5b8d;
   --background_color: #a7bcff;
 }
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+  top: 5%;
+  right: 0;
+}
+
+.sss {
+  border: 1px solid red;
+}

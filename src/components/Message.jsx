@@ -7,6 +7,11 @@ const Message = ({ message }) => {
   const currentUser = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
+  // console.log(message.date.toLocaleDateString());
+  const date = message.date
+  // console.log(date);
+
+
   const ref = useRef();
 
   useEffect(() => {

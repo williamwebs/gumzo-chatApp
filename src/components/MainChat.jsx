@@ -8,7 +8,7 @@ const MainChat = () => {
   const { data } = useContext(ChatContext);
 
   return (
-    <div className="main__chat">
+    <div className="main__chat relative">
       <div className="chat__info">
         <span>{data.user?.displayName}</span>
         <div className="chat__icons">
