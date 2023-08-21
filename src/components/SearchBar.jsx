@@ -41,6 +41,7 @@ const SearchBar = () => {
 
   const handleKey = (e) => {
     e.keyCode == 13 && handleSearch();
+    console.log('clicked');
   };
 
   const handleSelect = async () => {

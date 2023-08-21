@@ -50,6 +50,18 @@ const Input = () => {
       theme: "light",
     });
 
+  const notifySafe = () =>
+    toast.success("🦄 Safe message!", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
   const scanMessage = async () => {
     try {
       const result = await perspective.analyze(text, {
@@ -64,16 +76,22 @@ const Input = () => {
 
       setAnalysis(result.attributeScores);
 
-      const toxicityScore = result.attributeScores.THREAT.summaryScore.value;
+      const toxicityScore = result.attributeScores.TOXICITY.summaryScore.value;
       console.log(text);
+      console.log(toxicityScore);
 
       if (toxicityScore >= 0.5) {
         console.log("Toxic message");
         console.log(toxicityScore);
         setError(true);
         notify();
+        setImg(null);
+        setText("");
       } else {
+        // send to db
+        handleSend()
         console.log("Message passed toxicity check!");
+        notifySafe();
         console.log(toxicityScore);
         setError(false);
       }
@@ -85,7 +103,7 @@ const Input = () => {
 
   const handleSend = async () => {
     //
-    scanMessage();
+    // scanMessage();
     if (img) {
       const storageRef = ref(storage, uuid());
       const uploadTask = uploadBytesResumable(storageRef, img);
@@ -166,7 +184,7 @@ const Input = () => {
         </label>
         {/* <EmojiPicker className="emoji__" /> */}
 
-        <button onClick={handleSend}>Send</button>
+        <button onClick={scanMessage}>Send</button>
       </div>
       <ToastContainer
         position="top-right"
